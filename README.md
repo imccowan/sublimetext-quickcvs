@@ -3,7 +3,7 @@ QuickCVS
 
 [Sublime Text 2](http://www.sublimetext.com/2) CVS plugin that helps... a little bit!...
 
-This plugin is the QuickCVS extract taken from the original [JanJanJan](JanJanJan/) plugin.
+Runs **cvs** on your console and prints output to Sublime Text 2 console.
 
 ---
 
@@ -14,12 +14,12 @@ This plugin is the QuickCVS extract taken from the original [JanJanJan](JanJanJa
 
 Installation
 ------------
-TODO
+Follow [this readme](https://github.com/ePages-rnd/sublimetext-plugins).
 
 
 Features
 --------
-Runs **cvs** on your console and prints output to Sublime Text console.
+
 * Status
 * Diff
 * Update
