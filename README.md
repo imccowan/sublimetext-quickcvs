@@ -36,9 +36,9 @@ Configuration
     {
         "caption": "Open in cervisia",
         "command": "run_build_cvs",
-        "args" : {
-            "build_system" : "Packages/QuickCVS/CVS.sublime-build",
-            "build_variant" :"cervisia"
+        "args": {
+            "build_system": "Packages/QuickCVS/CVS.sublime-build",
+            "build_variant": "cervisia"
         }
     }
 ]
