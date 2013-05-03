@@ -4,9 +4,9 @@
 		{
 			"name": "QuickCVS",
 			"description": "You know it!",
-			"author": "Avtandil Kikabidze",
+			"author": "Jan Raasch",
 			"homepage": "https://github.com/ePages-rnd/sublimetext-quickcvs",
-			"last_modified": "2013-04-30 14:51",
+			"last_modified": "2013-05-03 14:51",
 			"platforms": {
 				"*": [
 					{
