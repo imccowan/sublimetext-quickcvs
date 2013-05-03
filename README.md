@@ -24,6 +24,34 @@ Features
 * Diff
 * Update
 * Get Clean Copy
+* Commit
+* Open in cervisia (Linux only)
+
+Configuration
+-------------
+* Create or append in file **Packages/User/Main.sublime-menu** to use cervisia feature:
+```
+[
+    {
+        "id": "tools",
+        "children": [
+            {
+                "id": "quickcvs",
+                "children": [
+                    {
+                        "caption": "Open containing folder in cervisia",
+                        "command": "run_build_cvs",
+                        "args" : {
+                            "build_system" : "Packages/QuickCVS/CVS.sublime-build",
+                            "build_variant" :"cervisia"
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+]
+```
 
 
 Development

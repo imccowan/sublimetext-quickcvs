@@ -38,5 +38,13 @@
             "build_system" : "Packages/QuickCVS/CVS.sublime-build",
             "build_variant" :"status"
         }
+    },
+    {
+        "caption": "Cervisia",
+        "command": "run_build_cvs",
+        "args" : {
+            "build_system" : "Packages/QuickCVS/CVS.sublime-build",
+            "build_variant" :"cervisia"
+        }
     }
 ]

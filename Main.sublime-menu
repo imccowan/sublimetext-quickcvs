@@ -3,6 +3,7 @@
         "id": "tools",
         "children": [
             {
+                "id":"quickcvs",
                 "caption": "QuickCVS",
                 "children": [
                     {
