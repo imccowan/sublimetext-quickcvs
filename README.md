@@ -9,6 +9,7 @@ Runs **cvs** on your console and prints output to Sublime Text 2 console.
 
 - [Installation](#installation)
 - [Features](#features)
+- [Configuration](#configuration)
 - [Development](#development)
 
 
