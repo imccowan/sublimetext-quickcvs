@@ -25,7 +25,7 @@ Features
 * Update
 * Get Clean Copy
 * Commit
-* Open in cervisia (Linux only)
+* Open current folder in cervisia (linux only)
 
 Configuration
 -------------
@@ -48,5 +48,5 @@ Configuration
 Development
 -----------
 * Show CVS status in the editor status bar.
-* Open the current file/the current cartridge in a graphical CVS tool.
+* Open the current cartridge in a graphical CVS tool.
 * Show a graphical diff.
