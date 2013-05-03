@@ -33,6 +33,10 @@
 		{
 			"name" : "status",
 			"cmd": ["cvs", "status", "$file_name"]
+		},
+		{
+			"name" : "cervisia",
+			"cmd" : ["cervisia", "$file_path"]
 		}
 	]
 }

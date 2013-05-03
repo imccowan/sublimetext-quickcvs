@@ -24,10 +24,29 @@ Features
 * Diff
 * Update
 * Get Clean Copy
+* Commit
+* Open current folder in cervisia (linux only)
+
+Configuration
+-------------
+* Create or append in file **Packages/User/Context.sublime-menu** to use cervisia feature:
+
+```
+[
+    {
+        "caption": "Open in cervisia",
+        "command": "run_build_cvs",
+        "args": {
+            "build_system": "Packages/QuickCVS/CVS.sublime-build",
+            "build_variant": "cervisia"
+        }
+    }
+]
+```
 
 
 Development
 -----------
 * Show CVS status in the editor status bar.
-* Open the current file/the current cartridge in a graphical CVS tool.
+* Open the current cartridge in a graphical CVS tool.
 * Show a graphical diff.
