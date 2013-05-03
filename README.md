@@ -30,6 +30,7 @@ Features
 Configuration
 -------------
 * Create or append in file **Packages/User/Context.sublime-menu** to use cervisia feature:
+
 ```
 [
     {
