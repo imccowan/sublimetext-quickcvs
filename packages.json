@@ -3,8 +3,8 @@
 	"packages": [
 		{
 			"name": "QuickCVS",
-			"description": "You know it!",
-			"author": "Jan Raasch",
+			"description": "Lightweight CVS plugin for Sublime Text 2.",
+			"author": "Jan Raasch (jraasch)",
 			"homepage": "https://github.com/ePages-rnd/sublimetext-quickcvs",
 			"last_modified": "2013-05-03 14:51",
 			"platforms": {
