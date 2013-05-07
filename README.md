@@ -26,28 +26,25 @@ Features
 * Update
 * Get Clean Copy
 * Commit
-* Open current folder in cervisia (linux only)
+* Open folder in cervisia (linux only)
 
-Configuration
+Usage
 -------------
-* Create or append in file **Packages/User/Context.sublime-menu** to use cervisia feature:
+### Via Command Pallette
+ * Bring up the Command Palette (`Command+Shift+P` on OS X, `Control+Shift+P` on Linux/Windows).
+ * Type `QuickCVS` to select `QuickCVS: status`, `QuickCVS: diff`,...
 
-```
-[
-    {
-        "caption": "Open in cervisia",
-        "command": "run_build_cvs",
-        "args": {
-            "build_system": "Packages/QuickCVS/CVS.sublime-build",
-            "build_variant": "cervisia"
-        }
-    }
-]
-```
+### Via Tools Menu
+ * Tools **>** QuickCVS
+ * Click `Status`, `Diff`,...
 
+When using `Diff` you can jump through differences using `F4` / `Shift+F4` .
 
-Development
+Development (TODO)
 -----------
+* Fix `QuickCVS: log` encoding problems. See `"build_variant" :"log"` in [CVS.sublime-build](https://github.com/ePages-rnd/sublimetext-quickcvs/blob/master/CVS.sublime-build).
+* Implement `cvs annotate` to render output into file buffer.
 * Show CVS status in the editor status bar.
 * Open the current cartridge in a graphical CVS tool.
-* Show a graphical diff.
+* Open folder in CVS-GUI for windows platform.
+* Show a graphical diff. Once you figure out how to render shell output into filebuffer, this is easy, when combind with the [FileDiffs](https://github.com/colinta/SublimeFileDiffs) plugin.
