@@ -64,7 +64,9 @@
                 "log",
                 "$file_name"
             ],
-            "encoding": "euc_jp"
+            "osx": {
+                "encoding": "euc_jp"
+            }
         },
         {
             "name": "cervisia",
