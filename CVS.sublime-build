@@ -74,6 +74,14 @@
                 "cervisia",
                 "$file_path"
             ]
+        },
+        {
+            "name": "cervisia_log",
+            "cmd": [
+                "cervisia",
+                "--log",
+                "$file_name"
+            ]
         }
     ]
 }
