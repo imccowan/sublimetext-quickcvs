@@ -15,9 +15,7 @@ class RunBuildCvsCommand(sublime_plugin.WindowCommand):
     #  * and then resetting the build_system to automatic
     def run(self, build_system, build_variant):
         self.window.run_command("set_build_system", {"file": build_system})
-        self.window.run_command("build", {
-            "variant": build_variant
-        })
+        self.window.run_command("build", {"variant": build_variant})
         # Set build_system to *automatic*
         self.window.run_command("set_build_system", {"file": ""})
 
@@ -54,20 +52,6 @@ def main_thread(callback, *args, **kwargs):
     sublime.set_timeout(functools.partial(callback, *args, **kwargs), 0)
 
 
-def _make_text_safeish(text, fallback_encoding, method='decode'):
-    # The unicode decode here is because sublime converts to unicode inside
-    # insert in such a way that unknown characters will cause errors, which is
-    # distinctly non-ideal... and there's no way to tell what's coming out of
-    # git in output. So...
-    return text
-    # print(text)
-    # try:
-    #     unitext = getattr(text, method)('utf-8')
-    # except (UnicodeEncodeError, UnicodeDecodeError):
-    #     unitext = getattr(text, method)(fallback_encoding)
-    # return unitext
-
-
 class QuickCvsCommandThread(threading.Thread):
     def __init__(self, command, on_done, working_dir="", fallback_encoding="", **kwargs):
         threading.Thread.__init__(self)
@@ -78,11 +62,6 @@ class QuickCvsCommandThread(threading.Thread):
             self.stdin = kwargs["stdin"]
         else:
             self.stdin = None
-        if "stdout" in kwargs:
-            self.stdout = kwargs["stdout"]
-        else:
-            self.stdout = subprocess.PIPE
-        self.fallback_encoding = fallback_encoding
         self.kwargs = kwargs
 
     def run(self):
@@ -95,29 +74,17 @@ class QuickCvsCommandThread(threading.Thread):
                 if self.working_dir != "":
                     os.chdir(self.working_dir)
 
-                proc = subprocess.Popen(
+                output = subprocess.check_output(
                     self.command,
-                    stdout=self.stdout,
                     stderr=subprocess.STDOUT,
                     stdin=subprocess.PIPE,
                     shell=shell,
                     universal_newlines=True
                 )
-                output = proc.communicate(self.stdin)[0]
-                if not output:
-                    output = ''
-                # if sublime's python gets bumped to 2.7 we can just do:
-                # output = subprocess.check_output(self.command)
-                main_thread(
-                    self.on_done,
-                    _make_text_safeish(output, self.fallback_encoding),
-                    **self.kwargs
-                )
+                main_thread(self.on_done, output, **self.kwargs)
 
         except subprocess.CalledProcessError as e:
             main_thread(self.on_done, e.returncode)
-        except OSError as e:
-            raise e
 
 
 # A base for all commands
@@ -130,8 +97,6 @@ class QuickCvsCommand(object):
             command = [arg for arg in command if arg]
         if 'working_dir' not in kwargs:
             kwargs['working_dir'] = self.get_working_dir()
-        if 'fallback_encoding' not in kwargs and self.active_view() and self.active_view().settings().get('fallback_encoding'):
-            kwargs['fallback_encoding'] = self.active_view().settings().get('fallback_encoding').rpartition('(')[2].rpartition(')')[0]
 
         s = sublime.load_settings("QuickCVS.sublime-settings")
         if s.get('cvs_save_first') and self.active_view() and self.active_view().is_dirty() and not no_save:
@@ -201,13 +166,21 @@ class QuickCvsBranchStatusCommand(QuickCvsTextCommand):
     def run(self, edit):
         s = sublime.load_settings("QuickCVS.sublime-settings")
         if s.get("cvs_statusbar"):
-            self.run_command(['cvs', 'status', self.get_file_name()], self.branchstatus_done, show_status=False, no_save=True)
+            self.run_command(
+                ['cvs', 'status', self.get_file_name()],
+                self.branchstatus_done, show_status=False, no_save=True
+            )
         else:
             self.view.set_status("cvs-branch", "")
             self.view.set_status("cvs-status", "")
 
     def branchstatus_done(self, result):
-        lines = result.splitlines()
+        try:
+            lines = result.splitlines()
+        except AttributeError:
+            self.view.set_status("cvs-branch", "")
+            self.view.set_status("cvs-status", "Not in CVS")
+            return
 
         branch = ""
         status = ""
@@ -224,8 +197,9 @@ class QuickCvsBranchStatusCommand(QuickCvsTextCommand):
         m = re.compile(r".*?Sticky Tag:\s+(\S*)").match(lines[7])
         if m:
             branch = m.group(1).strip()
-            if branch == "(none)":
-                branch = "HEAD"
+
+        if branch == "" or branch == "(none)":
+            branch = "HEAD"
 
         self.view.set_status("cvs-branch", "CVS branch: " + branch)
         self.view.set_status("cvs-status", "status: " + status)
