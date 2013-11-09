@@ -67,21 +67,6 @@
             "osx": {
                 "encoding": "euc_jp"
             }
-        },
-        {
-            "name": "cervisia",
-            "cmd": [
-                "cervisia",
-                "$file_path"
-            ]
-        },
-        {
-            "name": "cervisia_log",
-            "cmd": [
-                "cervisia",
-                "--log",
-                "$file_name"
-            ]
         }
     ]
 }
